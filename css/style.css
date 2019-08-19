@@ -1,0 +1,227 @@
+.left{
+    background: #eee;
+}
+
+.water {
+  fill: #00248F;
+}
+
+.land {
+  fill: #A98B6F;
+  stroke: #FFF;
+  stroke-width: 0.7px;
+}
+
+.land:hover {
+  fill:#33CC33;
+  stroke-width: 1px;
+}
+
+.focused {
+  fill: #33CC33;
+}
+
+select {
+  position: absolute;
+  top: 20px;
+  left: 580px;
+  border: solid #ccc 1px;
+  padding: 3px;
+  box-shadow: inset 1px 1px 2px #ddd8dc;
+}
+
+.countryTooltip {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  background: #fff;
+  padding: 5px;
+  text-align: left;
+  border: solid #ccc 1px;
+  color: #666;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+.arcs {
+    opacity:.1;
+    stroke: gray;
+    stroke-width: 3;
+}
+.flyers {
+    stroke-width:1;
+    opacity: .6;
+    stroke: darkred; 
+}
+.arc, .flyer {
+    stroke-linejoin: round;
+    fill:none;
+}
+.arc { }
+.flyer { }
+.flyer:hover { }
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.left {
+    flex: 0 0 32em;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+p {
+  padding: 21px;
+}
+
+header {
+  width: 100%;
+  height: 70px;
+}
+
+#main-title {
+  float: left;
+  height: 100%;
+  width: 32em;
+  text-align: center;
+}
+
+#country-select {
+  display: none;
+}
+
+nav > ul {
+  position: relative;
+  display: flex;
+
+  padding: 0;
+}
+
+nav a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+}
+
+nav ul li {
+  color: #333;
+  list-style: none;
+  transition: 0.1s;
+}
+
+nav > ul > li > a {
+  padding: 15px 25px;
+}
+
+nav ul > li.submenu > a:after {
+  position: relative;
+  float: right;
+  content: '';
+  margin-left: 10px;
+  margin-top: 8px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #fff;
+  border-bottom: 5px solid transparent;
+}
+
+nav ul > li.submenu:hover > a:after {
+  margin-top: 2px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid #fff;
+}
+
+nav > ul > li:hover {
+  background: #4096ee;
+}
+
+/* second stage (the mega-menu) */
+
+nav ul.megamenu {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap; 
+  width: 1200px;
+  top: -9999px;
+  left: 0;
+  padding: 40px 40px 0 40px;
+  background: #fff;
+  text-align: left;
+  border-top: 5px solid #4096ee;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+nav ul li:hover ul.megamenu {
+  top: 100%;
+}
+
+/* third stage (child-menus in the mega-menu) */
+
+nav ul.megamenu ul {
+  width: 25%;
+  margin-bottom: 40px;
+  color: #000;
+  box-shadow: none;
+}
+
+nav ul.megamenu h4 {
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+nav ul.megamenu ul li {
+  display: block;
+}
+
+nav ul.megamenu ul li a {
+  margin-top: 10px;
+  transition: 0.1s;
+  color: #000;
+}
+
+nav ul.megamenu ul li a:hover {
+  color: #4096ee;
+}
