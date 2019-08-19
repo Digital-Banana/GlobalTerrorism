@@ -6,11 +6,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.js"></script>
 <script src="vendor/crossfilter.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
 <link rel="stylesheet" href="css/reset.css" type="text/css"/>
 <link rel="stylesheet" href="css/style.css" type="text/css"/>
 </head>
 <body>
   <script>
+
+  // call stats JS dom appendage and function
+  javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
 
   var cf;
   var mainData;
