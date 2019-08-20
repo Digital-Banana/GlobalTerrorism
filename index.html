@@ -306,6 +306,51 @@
 
         //cGroup.selectAll("path").data(data).enter().exit().remove();
 
+      // Open menu sidepanel on circle/attack click
+
+        cGroup.selectAll("path").on("click", function (d) {
+
+          console.log("Attack clicked... showing menu")
+
+          let left = d3.select(".left")
+            .html(
+          "<div id='closePanel'>" +
+
+          "<div class='panel panel-1'>" +
+            "<span>" + "ATTACK DETAILS " + "</span>" +
+            "<span id='closePanel'>" + "Close BTN" + "</span>" +
+					"</div>" +
+
+          "<div class='panel panel-2'>" +
+            "<h2>" + "Date " + "</h2>" + "<h2>" + d.iday + " " + d.imonth + " " + d.iyear + "</h2>" +
+            "<h2>" + "Location " + "</h2>" + "<h2>" + d.city + " " + d.provstate + " " + d.country_txt + "</h2>" +
+					"</div>" +
+
+          "<div class='panel panel-3'>" +
+            "<h2>" + "People killed " + "</h2>" + "<h2>" + d.nkill + "</h2>" +
+            "<h2>" + "People injured " + "</h2>" + "<h2>" + d.nwound + "</h2>" +
+					"</div>" +
+
+          "<div class='panel panel-4'>" +
+            "<h2>" + "Perpetrator " + "</h2>" + "<h2>" + d.gname + "</h2>" +
+            "<h2>" + "Victim " + "</h2>" + "<h2>" + d.targsubtype1_txt + "</h2>" +
+            "<h2>" + "Attack type " + "</h2>" + "<h2>" + d.attacktype1_txt + "</h2>" +
+            "<h2>" + "Weapons used " + "</h2>" + "<h2>" + d.weapsubtype1_txt + "</h2>" +
+					"</div>" +
+
+          "<div class='panel panel-5'>" +
+            "<h2>" + "Summary" + "</h2>" +
+            "<p>" + d.summary + "</p>" +
+					"</div>" +
+
+          "<div class='panel panel-6'>" +
+            "<h2>" + "Source" + "</h2>" +
+            "<p>" + d.dbsource + "</p>" +
+					"</div>"
+          )
+
+        })
+
     }
 
     function createFilterMenu(headers) {
