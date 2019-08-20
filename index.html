@@ -7,6 +7,7 @@
 <script src="vendor/crossfilter.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 
 <link rel="stylesheet" href="css/reset.css" type="text/css"/>
 <link rel="stylesheet" href="css/style.css" type="text/css"/>
@@ -15,6 +16,21 @@
 </head>
 <body>
   <script>
+  
+  $(function(){
+
+    // Left side menu toggle
+    $(".left").on('click', function() {
+      if ($(this).attr('data-click-state') == 1) {
+        $(this).attr('data-click-state', 0)
+        $(this).css("flex", "0 0 32em")
+      } else {
+        $(this).attr('data-click-state', 1)
+        $(this).css("flex", "0 0 5em")
+      }
+    })
+
+  })
 
   // call stats JS dom appendage and function
   javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
