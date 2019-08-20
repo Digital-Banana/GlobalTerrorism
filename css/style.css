@@ -2,6 +2,11 @@
     background:grey;
 }
 
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
 /* Create global CSS variables */
 :root{
   --white: #ffffff;
