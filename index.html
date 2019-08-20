@@ -273,8 +273,16 @@
         .data(data)
         .enter().append("path")
         .attr("d", function(r) { return path(circle.center([r.longitude, r.latitude]).radius(3)()); })
-        .attr("fill", "none")
-        .attr("stroke", "red")
+        .attr("fill", function(d) {
+          if (d.nkill > 0) { return "#ED1C24" }
+          else if (d.nwound > 0 && d.nkill == 0) { return "#F7931E" }
+          else { return "#FFF" }
+        })
+        .attr("stroke", function(d) {
+          if (d.nkill > 0) { return "#FFF" }
+          else if (d.nwound > 0 && d.nkill == 0) { return "#FFF" }
+          else { return "#868E96" }
+        })
         .attr("stroke-width", 1);
 
         //cGroup.selectAll("path").data(data).enter().exit().remove();
