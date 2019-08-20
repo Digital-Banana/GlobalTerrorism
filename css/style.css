@@ -1,5 +1,21 @@
 .left{
-    background:grey;
+  background-color: #F9F9F9;
+
+  border-right: var(--grey-03) 1px solid;
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+}
+
+header {
+  background-color: #F9F9F9;
+
+  border-bottom: var(--grey-03) 1px solid;
+
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+
 }
 
 
