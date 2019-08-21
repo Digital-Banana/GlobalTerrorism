@@ -1,26 +1,27 @@
-.left{
-  background-color: #F9F9F9;
-
-  border-right: var(--grey-03) 1px solid;
-  -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
-  -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
-  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
-}
-
-header {
-  background-color: #F9F9F9;
-
-  border-bottom: var(--grey-03) 1px solid;
-
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-
-}
-
-
 html {
   font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.4;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 1.2em;
+}
+
+h2 {
+  font-size: 1em;
+}
+
+h3 {
+  font-size: .9em;
+}
+
+p {
+  font-size: .9em;
+  line-height: 1.4;
 }
 
 /* Create global CSS variables */
@@ -45,7 +46,7 @@ html {
 .land {
   fill: var(--grey-02);
   stroke: var(--grey-01);
-  stroke-width: 0.5px;
+  stroke-width: .3px;
 }
 
 body {
@@ -58,6 +59,71 @@ svg {
   margin: auto;
 }
 
+hr {
+  margin: -5px 0;
+  border: .5px solid var(--grey-01);
+}
+
+.left{
+  background-color: #F9F9F9;
+  border-right: var(--grey-03) 1px solid;
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  padding: 20px;
+}
+
+#sidepanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.pane {
+  display: flex;
+}
+
+.panel-left, .panel-right {
+  flex: 1;
+}
+
+.panel {
+  padding: 1em 0;
+  border-top: 1px solid var(--grey-01);
+}
+
+.panel h2 {
+  padding-bottom: 5px;
+}
+
+header {
+  background-color: #F9F9F9;
+  border-bottom: var(--grey-03) 1px solid;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+.tooltip {
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  max-width: 20em;
+  max-height: auto;
+  padding: 10px;
+  background: rgba(255, 255, 255);
+  border: var(--grey-03) 1px solid;
+  pointer-events: none;
+  border-radius: 2px;
+  -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.more-info {
+  padding-top: 10px;
+  font-style: italic;
+  color: var(--grey-02);
+}
 
 .countryTooltip {
   position: absolute;
@@ -140,10 +206,6 @@ svg {
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
-
-p {
-  padding: 21px;
-}
 
 header {
   width: 100%;
