@@ -41,15 +41,15 @@
   var cGroup;
 
   document.addEventListener('DOMContentLoaded', (event) => {
-    var width = 600,
-    height = 500,
+    var width = 1000,
+    height = 800,
     sens = 0.25,
     focused;
 
     //Setting projection
 
     var projection = d3.geoOrthographic()
-    .scale(245)
+    .scale(400)
     .rotate([0, 0])
     .translate([width / 2, height / 2])
     .clipAngle(90);
@@ -80,6 +80,12 @@
 
     var countryTooltip = d3.select("body").append("div").attr("class", "countryTooltip"),
     countryList = d3.select("body").append("select").attr("name", "countries").attr("id", "country-select");
+
+    const tooltip = d3
+      .select('body')
+      .append('div')
+      .attr('class', 'tooltip')
+      .style('opacity', 0);
     
 
     d3.json('/data/world-110m.json')
@@ -125,9 +131,6 @@
                     //   .enter().append("path")
                     //   .attr("class","flyer")
                     //   .attr("d", function(d) { return marker(flying_arc([d.longitude, d.latitude])) });
-
-
-
                 })
                 .catch(function(error){
                   throw error;
@@ -212,28 +215,33 @@
           projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
           svg.selectAll("path.land").attr("d", path);
           svg.select("g.circle").selectAll("path").each(function(d) {
-            d3.select(this).attr("d", path(circle.center([d.longitude, d.latitude]).radius(1)()))
-          });
+            d3.select(this).attr("d", function(r) { return path(circle.center([r.longitude, r.latitude])
+          .radius(function() { 
+            if (r.nkill > 1) return 2 
+            else return 1;
+          })());
+            })
           svg.selectAll(".focused").classed("focused", focused = false);
-        }))
+        })}))
+        
 
-      //Mouse events
+      // Mouse events for showing country name
 
-      .on("mouseover", function(d) {
-        countryTooltip.text(countryById[d.id])
-        .style("left", (d3.event.pageX + 7) + "px")
-        .style("top", (d3.event.pageY - 15) + "px")
-        .style("display", "block")
-        .style("opacity", 1);
-      })
-      .on("mouseout", function(d) {
-        countryTooltip.style("opacity", 0)
-        .style("display", "none");
-      })
-      .on("mousemove", function(d) {
-        countryTooltip.style("left", (d3.event.pageX + 7) + "px")
-        .style("top", (d3.event.pageY - 15) + "px");
-      });
+      // .on("mouseover", function(d) {
+      //   countryTooltip.text(countryById[d.id])
+      //   .style("left", (d3.event.pageX + 7) + "px")
+      //   .style("top", (d3.event.pageY - 15) + "px")
+      //   .style("display", "block")
+      //   .style("opacity", 1);
+      // })
+      // .on("mouseout", function(d) {
+      //   countryTooltip.style("opacity", 0)
+      //   .style("display", "none");
+      // })
+      // .on("mousemove", function(d) {
+      //   countryTooltip.style("left", (d3.event.pageX + 7) + "px")
+      //   .style("top", (d3.event.pageY - 15) + "px");
+      // });
 
       //Country focus on option select
 
@@ -290,8 +298,13 @@
 
       cGroup.selectAll("path")
         .data(data)
-        .enter().append("path")
-        .attr("d", function(r) { return path(circle.center([r.longitude, r.latitude]).radius(1)()); })
+        .enter().append("path") 
+        .attr("d", function(r) { return path(circle.center([r.longitude, r.latitude])
+          .radius(function() { 
+            if (r.nkill > 1) return 2 
+            else return 1
+          })());
+        })
         .attr("fill", function(d) {
           if (d.nkill > 0) return "#ED1C24"
           else if (d.nwound > 0 && d.nkill == 0) return "#F7931E"
@@ -305,8 +318,55 @@
         .attr("stroke-width", 1);
 
         //cGroup.selectAll("path").data(data).enter().exit().remove();
+      
+      ////////////////////////////////////
+      // Create tooltip on circle hover //
+      ////////////////////////////////////
 
-      // Open menu sidepanel on circle/attack click
+      cGroup.selectAll("path").on("mouseover", function(d) {
+        d3.select(this).style("cursor", "pointer")
+        if (d.summary) {
+          tooltip
+            .transition()
+            .duration(100)
+            .style('opacity', 1);
+          tooltip
+            .html(
+              "<h3>" + d.attacktype1_txt + "</h3>" +
+              "<br>" + "<hr>" + "<br>" +
+              "<p>" + d.summary + "</p>" +
+              "<p class='more-info'>" + "Click for more information" + "</p>"
+            )
+            .style('left', d3.event.pageX + 10 + 'px')
+            .style('top', d3.event.pageY + 10 + 'px');
+        } else if (!d.summary) {
+            tooltip
+            .transition()
+            .duration(100)
+            .style('opacity', 1);
+          tooltip
+            .html(
+              "<h3>" + d.attacktype1_txt + "</h3>" +
+              "<br>" + "<hr>" + "<br>" +
+              "<p class='noText'>" + "<i>" + "No summary available" + "</i>" + "</p>" +
+              "<p class='more-info'>" + "Click for more information" + "</p>"
+            )
+            .style('left', d3.event.pageX + 10 + 'px')
+            .style('top', d3.event.pageY + 10 + 'px');
+        }
+      })
+
+      cGroup.selectAll("path").on("mouseout", function(d) {
+        d3.select(this).style("cursor", "default")
+        tooltip
+          .transition()
+          .duration(100)
+          .style("opacity", 0);
+      })
+
+      ////////////////////////////////////////////////
+      // Open menu sidepanel on circle/attack click //
+      ////////////////////////////////////////////////
 
         cGroup.selectAll("path").on("click", function (d) {
 
@@ -314,28 +374,59 @@
 
           let left = d3.select(".left")
             .html(
-          "<div id='closePanel'>" +
+          "<div id='sidepanel'>" +
 
           "<div class='panel panel-1'>" +
-            "<span>" + "ATTACK DETAILS " + "</span>" +
-            "<span id='closePanel'>" + "Close BTN" + "</span>" +
+            "<div class='pane'>" + 
+              "<h2 class='panel-left'>" + "ATTACK DETAILS " + "</h2>" +
+              "<p class='panel-right' id='btn_close'>" + "Close BTN" + "</p>" +
+            "</div>" +
 					"</div>" +
 
           "<div class='panel panel-2'>" +
-            "<h2>" + "Date " + "</h2>" + "<h2>" + d.iday + " " + d.imonth + " " + d.iyear + "</h2>" +
-            "<h2>" + "Location " + "</h2>" + "<h2>" + d.city + " " + d.provstate + " " + d.country_txt + "</h2>" +
+            "<div class='pane'>" + 
+              "<h2 class='panel-left'>" + "Date " + "</h2>" + 
+              "<p class='panel-right'>" + d.iday + " / " + d.imonth + " / " + d.iyear + "</p>" +
+            "</div>" +
+
+            "<div class='pane'>" + 
+              "<h2 class='panel-left'>" + "Location " + "</h2>" + 
+              "<p class='panel-right'>" + d.city + ", " + " " + d.country_txt + "</p>" +
+              "</div>" +
 					"</div>" +
 
-          "<div class='panel panel-3'>" +
-            "<h2>" + "People killed " + "</h2>" + "<h2>" + d.nkill + "</h2>" +
-            "<h2>" + "People injured " + "</h2>" + "<h2>" + d.nwound + "</h2>" +
+          "<div class='panel panel-2'>" +
+            "<div class='pane'>" + 
+              "<h2 class='panel-left'>" + "People killed " + "</h2>" + 
+              "<p class='panel-right'>" + d.nkill + "</p>" +
+            "</div>" +
+
+            "<div class='pane'>" + 
+              "<h2 class='panel-left'>" + "People injured " + "</h2>" + 
+              "<p class='panel-right'>" + d.nwound + "</p>" +
+              "</div>" +
 					"</div>" +
 
           "<div class='panel panel-4'>" +
-            "<h2>" + "Perpetrator " + "</h2>" + "<h2>" + d.gname + "</h2>" +
-            "<h2>" + "Victim " + "</h2>" + "<h2>" + d.targsubtype1_txt + "</h2>" +
-            "<h2>" + "Attack type " + "</h2>" + "<h2>" + d.attacktype1_txt + "</h2>" +
-            "<h2>" + "Weapons used " + "</h2>" + "<h2>" + d.weapsubtype1_txt + "</h2>" +
+            "<div class='pane'>" + 
+              "<h2 class='panel-left'>" + "Perpetrator " + "</h2>" + 
+              "<p class='panel-right'>" + d.gname + "</p>" +
+            "</div>" +
+
+            "<div class='pane'>" + 
+              "<h2 class='panel-left'>" + "Victim " + "</h2>" + 
+              "<p class='panel-right'>" + d.targsubtype1_txt + "</p>" +
+            "</div>" +
+
+            "<div class='pane'>" + 
+              "<h2 class='panel-left'>" + "Attack type " + "</h2>" + 
+              "<p class='panel-right'>" + d.attacktype1_txt + "</p>" +
+            "</div>" +
+
+            "<div class='pane'>" + 
+              "<h2 class='panel-left'>" + "Weapons used " + "</h2>" + 
+              "<p class='panel-right'>" + d.weapsubtype1_txt + "</p>" +
+            "</div>" +
 					"</div>" +
 
           "<div class='panel panel-5'>" +
