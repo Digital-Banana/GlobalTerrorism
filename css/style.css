@@ -173,11 +173,13 @@ header {
 }
 
 .dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
+    background-color: #F9F9F9;
+    color: var(--base);
+    padding: .7em 1em;
+    margin-right: 1em;
     font-size: 16px;
-    border: none;
+    border: 1px solid var(--grey-03);
+    min-width: 10em;
 }
 
 .dropdown {
@@ -188,24 +190,30 @@ header {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #F9F9F9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    border: 1px solid var(--grey-03);
+}
+
+.dropbtn:hover {
+  border-bottom: #F9F9F9;
 }
 
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
+    color: var(--base);
+    padding: .5em 1em;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+  background-color: var(--grey-01);
+}
 
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 header {
   width: 100%;
@@ -225,8 +233,7 @@ header {
 
 nav > ul {
   position: relative;
-  display: flex;
-
+  float: left;
   padding: 0;
 }
 
@@ -243,7 +250,15 @@ nav ul li {
 }
 
 nav > ul > li > a {
-  padding: 15px 25px;
+  height: 68px;
+  background-color: var(--grey-01);
+}
+
+li.submenu a p {
+  padding: 0 40px;
+  position: relative;
+  top: 25px;
+  font-weight: bold;
 }
 
 nav ul > li.submenu > a:after {
@@ -265,7 +280,7 @@ nav ul > li.submenu:hover > a:after {
 }
 
 nav > ul > li:hover {
-  background: #4096ee;
+  background-color: var(--grey-01);
 }
 
 /* second stage (the mega-menu) */
@@ -280,8 +295,7 @@ nav ul.megamenu {
   padding: 40px 40px 0 40px;
   background: #fff;
   text-align: left;
-  border-top: 5px solid #4096ee;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--base);
   z-index: 1;
 }
 
