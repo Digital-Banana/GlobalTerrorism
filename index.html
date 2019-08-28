@@ -22,15 +22,16 @@
   $(function(){
 
     // Left side menu toggle
-    $(".left").on('click', function() {
+    $(".btn_close").on('click', function() {
+      console.log("CLICK BTN CLOSE")
       if ($(this).attr('data-click-state') == 1) {
         $(this).attr('data-click-state', 0)
-        $(this).css("flex", "0 0 32em")
+        $(".left").css("flex", "0 0 32em")
         $("#sidepanel").css("display", "flex")
         $("h2.panel-left").css("display", "flex")
       } else {
         $(this).attr('data-click-state', 1)
-        $(this).css("flex", "0 0 5em")
+        $(".left").css("flex", "0 0 5em")
         $("#sidepanel").css("display", "none")
         $("h2.panel-left").css("display", "none")
       }
@@ -383,9 +384,9 @@
             .html(
 
           "<div class='panel panel-1'>" +
-            "<div class='pane'>" + 
+            "<div class='pane'>" +
               "<h2 class='panel-left'>" + "ATTACK DETAILS " + "</h2>" +
-              "<i class='fas fa-bars btn_close'>" + "</i>" +
+              "<span class='btn_close'>" + "<i class='fas fa-bars'>" + "</i>" + "</span>" +
             "</div>" +
           "</div>" +
           
