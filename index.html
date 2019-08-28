@@ -24,9 +24,11 @@
       if ($(this).attr('data-click-state') == 1) {
         $(this).attr('data-click-state', 0)
         $(this).css("flex", "0 0 32em")
+        $("#sidepanel").css("display", "flex")
       } else {
         $(this).attr('data-click-state', 1)
         $(this).css("flex", "0 0 5em")
+        $("#sidepanel").css("display", "none")
       }
     })
 
@@ -371,6 +373,7 @@
         cGroup.selectAll("path").on("click", function (d) {
 
           console.log("Attack clicked... showing menu")
+          $(".left").css("flex", "0 0 32em")
 
           let left = d3.select(".left")
             .html(
