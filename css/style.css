@@ -87,15 +87,15 @@ hr {
 
 .panel {
   padding: 1em 1em;
-  border-top: 1px solid var(--grey-02);
+  border-bottom: 1px solid var(--grey-02);
 }
 
-.panel:first-child {
-  border-top: none;
+.panel:last-child {
+  border: none;
 }
 
 .panel h2 {
-  padding-bottom: 5px;
+  padding: 3px 0;
 }
 
 header {
@@ -175,8 +175,9 @@ header {
     flex: 0 0 32em;
 }
 
-#btn_close {
+.btn_close {
   float: right;
+  padding-top: 3px;
 }
 
 .dropbtn {
@@ -197,9 +198,6 @@ header {
 
 .dropdown-content::-webkit-scrollbar {
   width: .6em;
-}
-
-.dropdown-content::-webkit-scrollbar-track {
 }
 
 .dropdown-content::-webkit-scrollbar-thumb {
