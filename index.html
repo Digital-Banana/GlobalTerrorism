@@ -9,6 +9,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+
 <link rel="stylesheet" href="css/reset.css" type="text/css"/>
 <link rel="stylesheet" href="css/style.css" type="text/css"/>
 
@@ -377,14 +379,15 @@
 
           let left = d3.select(".left")
             .html(
-          "<div id='sidepanel'>" +
 
           "<div class='panel panel-1'>" +
             "<div class='pane'>" + 
               "<h2 class='panel-left'>" + "ATTACK DETAILS " + "</h2>" +
-              "<p class='panel-right' id='btn_close'>" + "Close BTN" + "</p>" +
+              "<i class='fas fa-bars btn_close'>" + "</i>" +
             "</div>" +
-					"</div>" +
+          "</div>" +
+          
+          "<div id='sidepanel'>" +
 
           "<div class='panel panel-2'>" +
             "<div class='pane'>" + 
