@@ -27,10 +27,12 @@
         $(this).attr('data-click-state', 0)
         $(this).css("flex", "0 0 32em")
         $("#sidepanel").css("display", "flex")
+        $("h2.panel-left").css("display", "flex")
       } else {
         $(this).attr('data-click-state', 1)
         $(this).css("flex", "0 0 5em")
         $("#sidepanel").css("display", "none")
+        $("h2.panel-left").css("display", "none")
       }
     })
 
