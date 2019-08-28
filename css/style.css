@@ -12,7 +12,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1em;
+  font-size: .9em;
 }
 
 h3 {
@@ -70,7 +70,6 @@ hr {
   -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
-  padding: 20px;
 }
 
 #sidepanel {
@@ -87,8 +86,12 @@ hr {
 }
 
 .panel {
-  padding: 1em 0;
-  border-top: 1px solid var(--grey-01);
+  padding: 1em 1em;
+  border-top: 1px solid var(--grey-02);
+}
+
+.panel:first-child {
+  border-top: none;
 }
 
 .panel h2 {
@@ -172,11 +175,15 @@ header {
     flex: 0 0 32em;
 }
 
+#btn_close {
+  float: right;
+}
+
 .dropbtn {
+    padding: .7em 1em;
+    margin-left: 1em;
     background-color: #F9F9F9;
     color: var(--base);
-    padding: .7em 1em;
-    margin-right: 1em;
     font-size: 16px;
     border: 1px solid var(--grey-03);
     min-width: 10em;
@@ -185,15 +192,31 @@ header {
 .dropdown {
     position: relative;
     display: inline-block;
+    top: 13px;
+}
+
+.dropdown-content::-webkit-scrollbar {
+  width: .6em;
+}
+
+.dropdown-content::-webkit-scrollbar-track {
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: var(--grey-03);
+  margin: 10px;
 }
 
 .dropdown-content {
+    margin-left: 1em;
     display: none;
     position: absolute;
     background-color: #F9F9F9;
-    min-width: 160px;
     z-index: 1;
     border: 1px solid var(--grey-03);
+    max-height: 30em;
+    overflow: auto;
 }
 
 .dropbtn:hover {
